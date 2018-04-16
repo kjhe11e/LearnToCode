@@ -1,42 +1,71 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import logo from './logo.svg';
 import './App.css';
+// Tutorials:
+import EventEmitter from './tutorials/EventEmitter';
+import HttpServer from './tutorials/HttpServer';
 
 class App extends Component {
 
-  state = {
-    response: ''
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => {
-        this.setState({ response: res.express })
-      })
-      .catch(err => console.log('Error:', err));
+    this.activeTutorial = 'EventEmitter';
+    this.switchTutorial = this.switchTutorial.bind(this);
   }
 
-  callApi = async () => {
-    const response = await fetch('/api');
-    const body = await response.json();
+  switchTutorial(tutorial) {
+    console.log('Selected tutorial:', tutorial);
 
-    if (response.status !== 200) {
-      throw Error(body.message);
+    // TODO: The following 'works', but doesn't feel right.
+    this.activeTutorial = tutorial;
+    this.setState({activeTutorial: tutorial}, () => {
+      console.log('activeTutorial:', this.activeTutorial);
+    });
+  }
+
+  renderSwitch(tutorial) {
+    switch(tutorial) {
+      case 'EventEmitter':
+        return 'EventEmitter';
+      case 'HttpServer':
+        return 'HttpServer';
+      default:
+        return 'EventEmitter';
     }
-
-    return body;
   }
 
   render() {
+    const showTutorial = this.activeTutorial;
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to LearnToCode</h1>
         </header>
-        <p className="App-intro">
-          {this.state.response}
+        <p className="App-tabs">
+          <Grid fluid>
+            <Row>
+              <Col xs="auto" sm="auto" md="auto" lg="auto" onClick={ t => this.switchTutorial("EventEmitter") }>
+                Event Emitters
+              </Col>
+              <Col xs="auto" sm="auto" md="auto" lg="auto" onClick={ t => this.switchTutorial("HttpServer") }>
+                HttpServer
+              </Col>
+            </Row>
+          </Grid>
         </p>
+
+        <div>
+          {showTutorial === 'HttpServer' ? (
+            <HttpServer />
+          ) : (
+            <EventEmitter />
+          )}
+        </div>
+
       </div>
     );
   }
