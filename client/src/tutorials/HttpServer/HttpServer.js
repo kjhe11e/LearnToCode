@@ -32,8 +32,15 @@ class HttpServer extends Component {
                     </p>
                     <p>
                         Congrats! Open up a terminal and execute 'node server.js'.<br />
-                        Then, open up a second terminal and execute 'curl -i localhost:4000'.<br />
+                        Then, open up your browser to http://localhost:4000. Additionally, you can execute 'curl -i localhost:4000' from another terminal.<br />
+                    </p>
+                    <p>
                         You will notice the terminal running the server will log "We have a new connection" for each incoming connection.
+                        Each client connection (i.e. your browser, or using the curl command) will see the response returned from the server.<br />
+                    </p>
+                    <p>
+                        Pretty cool, huh?!<br />
+                        More coming soon... :)
                     </p>
                 </div>
             </div>

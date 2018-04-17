@@ -10,9 +10,14 @@ class Snippet_1_Http extends Component {
                     const http = require('http');
                     const server = http.createServer();
 
-                    server.on('connection', function (req, res) {
-                        // We can handle incoming connections here
+                    server.on('request', function (req, res) {
+                        // We can handle incoming requests here.
                         console.log('We have a new connection');
+
+                        // Here we will edit the response object to respond to the client with a message.
+                        res.writeHead(200, {'Content-Type': 'text/plain'});
+                        res.write('Yo world!');
+                        res.end();
                     });
 
                     server.listen(4000);
