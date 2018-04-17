@@ -3,8 +3,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import logo from './logo.svg';
 import './App.css';
 // Tutorials:
-import EventEmitter from './tutorials/EventEmitter';
-import HttpServer from './tutorials/HttpServer';
+import EventEmitter from './tutorials/EventEmitter/EventEmitter';
+import HttpServer from './tutorials/HttpServer/HttpServer';
 
 class App extends Component {
 
